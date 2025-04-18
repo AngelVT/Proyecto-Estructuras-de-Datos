@@ -1,37 +1,57 @@
 const listaDeCompras = [];
 
 function agregarProducto(producto) {
-    producto = producto.trim().toLowerCase();
-
     if (!producto || producto === "") {
-        throw new Error("Invalid product");
+        console.error("Invalid product");
+        return;
     }
 
+    producto = producto.trim().toLowerCase();
+
     if (listaDeCompras.includes(producto)) {
-        throw new Error("Product already exist");
+        console.error("Product already exist");
+        return;
     }
 
     listaDeCompras.push(producto);
 }
 
 function eliminarProducto(producto) {
-    producto = producto.trim().toLowerCase();
-
     if (!producto || producto === "") {
-        throw new Error("Invalid product");
+        console.error("Invalid product");
+        return;
     }
+
+    producto = producto.trim().toLowerCase();
 
     const deletedProduct = listaDeCompras.indexOf(producto);
 
     if (deletedProduct !== -1) {
         listaDeCompras.splice(deletedProduct, 1);
     } else {
-        throw new Error("Product does not exist");
+        console.error("Product does not exist");
     }
 }
 
 function mostrarLista() {
+    console.log("------------------");
     listaDeCompras.forEach(producto => {
         console.log(producto);
     });
+    console.log("------------------");
 }
+
+agregarProducto("Aguacates");
+agregarProducto("Arroz");
+agregarProducto("Aceite");
+agregarProducto("Arroz");
+agregarProducto("");
+agregarProducto();
+
+mostrarLista();
+
+eliminarProducto("Aguacates");
+eliminarProducto("Agua");
+eliminarProducto("");
+
+mostrarLista();
